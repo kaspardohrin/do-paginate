@@ -14,6 +14,14 @@ create an array with numbers in incremental order with the current index in the 
 * npm: 6.14.11
 * yarn: 1.22.10
 
+## properties
+| name | type | description |
+|---|---|---|
+| `current_index` | `number` | **required**. the page number that should appear in the middle of the pagination-sequence.<br><br>*example*: when your index is 10 and your offset is 5 all pages from 5-15 will be shown where 10 will appear in the middle. |
+| `items_per_page` | `number` | **required**. the amount of items you're displaying on each page. |
+| `items_total` | `number` | **required**. the length of your data. This value will determine how many pages can be generated.  |
+| `offset` | `number` | **required**. limit the amount of pages shown by adding the offset parameter. This generated pagination sequence will contain all pages before and after the index based on the offset.<br><br>*example*: when your index is 10 and your offset is 5 all pages from 5-15 will be shown. |
+
 ## code-examples
 import the pagination -file and pass in your parameters
 ```typescript
@@ -23,8 +31,10 @@ import the pagination -file and pass in your parameters
   const index: number = 5
   const items_per_page: number = 25
   const items_total: number = 5000
+  const offset: number = 5
 
-  const sequence: Array<number> = paginate(index, items_per_page, items_total) // [ 1,2,3,4,5,6,7,8,9,10,11 ]
+  const sequence: Array<number> =
+    paginate(index, items_per_page, items_total, offset) // [ 1,2,3,4,5,6,7,8,9,10,11 ]
 ```
 ```javascript
   // javascript
@@ -33,8 +43,10 @@ import the pagination -file and pass in your parameters
   const index = 5
   const items_per_page = 25
   const items_total = 5000
+  const offset = 5
 
-  const sequence = paginate(index, items_per_page, items_total) // [ 1,2,3,4,5,6,7,8,9,10,11 ]
+  const sequence =
+    paginate(index, items_per_page, items_total, offset) // [ 1,2,3,4,5,6,7,8,9,10,11 ]
 ```
 ```typescript
   // typescript example with express route
@@ -48,9 +60,10 @@ import the pagination -file and pass in your parameters
     cors({ origin: '*' }),
   )
 
+  // request url: /
   app.get('/', async (_, res) => res.send('<a href=\'/index=1&limit=25\'>test pagination</a>'))
 
-  // request url: ?index=1&limit=25
+  // request url: /index=1&limit=25
   app.get('/index=:index?&limit=:limit?', async (req, res) => {
     const d_index: number = 1  // default index if none passed in for example
     const d_limit: number = 25 // default limit if none passed in for example
@@ -65,7 +78,7 @@ import the pagination -file and pass in your parameters
 
     const pages: Array<number> = paginate(index, limit, items_total, offset)
 
-    const documents: unknown = null // TODO: query database based on: index, limit
+    // TODO: query database based on: index, limit, and add items to response
 
     res.send(
       pages.map(
@@ -84,17 +97,16 @@ import the pagination -file and pass in your parameters
   )
 ```
 
-## properties
-| name | type | description |
-|---|---|---|
-| `current_index` | `number` | **required**. the page number that should appear in the middle of the pagination-sequence.<br><br>*example*: when your index is 10 and your offset is 5 all pages from 5-15 will be shown where 10 will appear in the middle. |
-| `items_per_page` | `number` | **required**. the amount of items you're displaying on each page. |
-| `items_total` | `number` | **required**. the length of your data. This value will determine how many pages can be generated.  |
-| `offset` | `number` | **required**. limit the amount of pages shown by adding the offset parameter. This generated pagination sequence will contain all pages before and after the index based on the offset.<br><br>*example*: when your index is 10 and your offset is 5 all pages from 5-15 will be shown. |
-
 ## the uniqueness of this pagination-method
   - the sequence will never contain numbers that could lead to pages being generated with no content to display on them - given the parameters passed in are correct. for example, lets say the index is based on a parameter in an url, and the user changes the index value to 5000000, but you have a total of 5000 items to display with each page containing 25 items, then the sequence generated will end at 200, because at index 201 you'd have an empty page
   - takes a couple ms to generate
 
 ## license
 MIT
+
+## change-log
+`v1.0.4`: update readme, make parameter: `offset` required
+`v1.0.3`: update readme, and fix typo's
+`v1.0.2`: update readme, and fix typo's
+`v1.0.1`: update readme, and fix typo's
+`v1.0.0`: initial publish
