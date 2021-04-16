@@ -1,12 +1,12 @@
 {
   "name": "do-paginate",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "license": "MIT",
   "description": "create an array with numbers in incremental order with the current index in the middle of the sequence, and the sequence always being the same length, no matter the index passed in",
   "main": "lib/paginate.js",
   "types": "lib/paginate.d.ts",
   "prepublish": "tsc",
-  "author": "kaspar dohrin <kdohrin@kaspardohrin.nl>",
+  "author": "kaspar dohrin <contact@kaspardohrin.nl>",
   "homepage": "https://github.com/kaspardohrin/do-paginate/",
   "repository": {
     "type": "git",
