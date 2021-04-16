@@ -4,13 +4,13 @@
  * @param {number} current_index - the current, active page-number
  * @param {number} items_per_page - the amount of items you're showing per page
  * @param {number} items_total - the total amount of items or limit
- * @param {number} offset - defaults to 5 - amount of pages numbers to display before and after active page-number
+ * @param {number} offset - amount of page-numbers to display before and after active page-number
  */
 export default function paginate(
   index_current: number,
   items_per_page: number,
   items_total: number,
-  offset: number = 5,
+  offset: number,
 ): Array<number> {
 
   // cap at 1 for <1 and 1e15 for >1e15
