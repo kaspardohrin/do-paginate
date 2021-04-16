@@ -1,6 +1,6 @@
 {
   "name": "do-paginate",
-  "version": "1.0.5",
+  "version": "1.0.8",
   "license": "MIT",
   "description": "create an array with numbers in incremental order with the current index in the middle of the sequence, and the sequence always being the same length, no matter the index passed in",
   "main": "lib/paginate.js",
@@ -29,7 +29,9 @@
   "bin": {
     "paginate": "bin/paginate"
   },
-  "scripts": {},
+  "scripts": {
+    "publish:npm": "tsc && npm publish --access public"
+  },
   "devDependencies": {
     "typescript": "^4.2.3"
   }

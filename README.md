@@ -56,30 +56,25 @@ import the pagination -file and pass in your parameters
 
   const app = express()
 
-  app.use(
-    cors({ origin: '*' }),
-  )
+  app.use(cors({ origin: '*' }))
 
   // request url: /
   app.get('/', async (_, res) =>
-    res.send('<a href=\'/index=1&limit=25\'>test pagination</a>'))
+    res.send("<a href='/index=1&limit=25'>test pagination</a>")
+  )
 
   // request url: /index=1&limit=25
   app.get('/index=:index?&limit=:limit?', async (req, res) => {
-    const d_index: number = 1  // default index - used if, for example, none is passed in
+    const d_index: number = 1 // default index - used if, for example, none is passed in
     const d_limit: number = 25 // default limit - used if, for example, none is passed in
-    const offset: number = 5   // pages to generate
+    const offset: number = 5 // pages to generate
 
     // get index from url, else fallback to d_index
     const index: number =
-      +(req.params?.['index'] as string)
-        ?.replace(/[^\d-]/gm, '') ||
-      d_index
+      +(req.params?.['index'] as string)?.replace(/[^\d-]/gm, '') || d_index
     // get limit from url, else fallback to d_limit
     const limit: number =
-      +(req.params?.['limit'] as string)
-        ?.replace(/[^\d-]/gm, '') ||
-      d_limit
+      +(req.params?.['limit'] as string)?.replace(/[^\d-]/gm, '') || d_limit
 
     const items_total: number = 5000 // TODO: get total items
 
@@ -88,20 +83,22 @@ import the pagination -file and pass in your parameters
     // TODO: query database based on: index, limit, and add items to response
 
     res.send(
-      pages.map(
-        (x: number, _: number) =>
-          `<a href='/index=${x}&limit=${limit}'>${x}</a>`
-      )
-        .join('\n')
+      [
+        `<a href=/index=${index - 1}&limit=${limit}> < </a>`,
+        pages
+          .map(
+            (x: number, _: number) =>
+            `<a href='/index=${x}&limit=${limit}' style="width: 18px; text-align: center; display: inline-block;">${x}</a>`
+          )
+          .join('\n'),
+        `<a href=/index=${index + 1}&limit=${limit}> > </a>`,
+      ].join('')
     )
   })
 
-  app.listen(
-    process.env.PORT || 8000,
-    () => {
-      console.info(`Server started on port ${process.env.PORT || 8000}`)
-    }
-  )
+  app.listen(process.env.PORT || 8000, () => {
+    console.info(`Server started on port ${process.env.PORT || 8000}`)
+  })
 ```
 
 ## the uniqueness of this pagination-method
@@ -112,6 +109,10 @@ import the pagination -file and pass in your parameters
 MIT
 
 ## change-log
+`v1.0.8`: extended code example with arrows<br>
+`v1.0.7`: forgot to build typescript after making changes, parameter: `offset` is now actually required<br>
+`v1.0.6`: update package.json<br>
+`v1.0.5`: update readme, and fix typo's<br>
 `v1.0.4`: update readme, make parameter: `offset` required<br>
 `v1.0.3`: update readme, and fix typo's<br>
 `v1.0.2`: update readme, and fix typo's<br>
