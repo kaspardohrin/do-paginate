@@ -105,8 +105,8 @@ import the pagination -file and pass in your parameters
 MIT
 
 ## change-log
-`v1.0.4`: update readme, make parameter: `offset` required
-`v1.0.3`: update readme, and fix typo's
-`v1.0.2`: update readme, and fix typo's
-`v1.0.1`: update readme, and fix typo's
-`v1.0.0`: initial publish
+`v1.0.4`: update readme, make parameter: `offset` required<br>
+`v1.0.3`: update readme, and fix typo's<br>
+`v1.0.2`: update readme, and fix typo's<br>
+`v1.0.1`: update readme, and fix typo's<br>
+`v1.0.0`: initial publish<br>
