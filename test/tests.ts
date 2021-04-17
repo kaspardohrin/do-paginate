@@ -51,7 +51,7 @@ const test_cases: Array<TestCase> = [
   ],
 
   [
-    'i WAY OVER & OFFSET > CONTENT',
+    'i WAY OVER && OFFSET > CONTENT',
     [1, 2, 3, 4, 5],
     [500, 10, 50, 10],
   ],
@@ -75,9 +75,9 @@ const test_cases: Array<TestCase> = [
   ],
 
   [
-    'Infinity',
-    Array.from({ length: 1e5 * 2 + 1 }, (_, i) => i++ + (1e15 - 1e5)),
-    [Infinity, 25, Infinity, Infinity],
+    '-Infinity',
+    [1],
+    [-Infinity, 25, -Infinity, -Infinity],
   ],
 
   [
@@ -87,9 +87,9 @@ const test_cases: Array<TestCase> = [
   ],
 
   [
-    '-Infinity',
-    [1],
-    [-Infinity, 25, -Infinity,-Infinity],
+    'Infinity',
+    Array.from({ length: 1e5 * 2 + 1 }, (_, i) => i++ + (1e15 - 1e5)),
+    [Infinity, 25, Infinity, Infinity],
   ],
 
 ]

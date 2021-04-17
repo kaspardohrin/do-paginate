@@ -96,7 +96,7 @@ typescript with express and basic routing example
         pages
           .map(
             (x: number, _: number) =>
-            `<a href='/index=${x}&limit=${limit}' style="min-width: 18px; text-align: center; display: inline-block;">${x}</a>`
+              `<a href='/index=${x}&limit=${limit}' style="min-width: 18px; text-align: center; display: inline-block;">${x}</a>`
           )
           .join('\n'),
         `<a href=/index=${index + 1}&limit=${limit}> > </a>`,
@@ -120,7 +120,7 @@ MIT
 
 
 ## change-log
-`v1.1.1`: keep test files in git repo only, after al<br>
+`v1.1.1`: keep test files in git repo only, changed my mind<br>
 `v1.1.0`: change css in code example from width to min-width, refactor pagination algorithm slightly which resulted in ~10% speed increase, add test script, extend build script in package.json<br>
 `v1.0.8`: extended code example with arrows to increment index by +1 or -1<br>
 `v1.0.7`: forgot to build typescript after making changes, parameter: `offset` is now actually required<br>
