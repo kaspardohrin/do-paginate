@@ -1,4 +1,5 @@
 lib/
 bin/
+test/*.js
 
 node_modules/

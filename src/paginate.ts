@@ -20,13 +20,20 @@ export default function paginate(
       : (index_current > 1e15)
         ? 1e15
         : index_current
-  // cap at 1 for <1
+  // cap at 1 for <1 and 1e50 for >1e50
   const f_items_per_page: number =
-    (!+items_per_page || items_per_page < 1) ? 1 : items_per_page
-  // cap at 1 for <1
+    (!+items_per_page || items_per_page < 1)
+      ? 1
+      : (items_per_page > 1e50)
+        ? 1e50
+        : items_per_page
+  // cap at 1 for <1 and 1e50 for >1e50
   const f_items_total: number =
-    (!+items_total || items_total < 1) ? 1 : items_total
-  // cap at 1 for <1 and 1e5 for >1e15
+    (!+items_total || items_total < 1)
+      ? 1
+      : (items_total > 1e50)
+        ? 1e50
+        : items_total
   const f_offset: number =
     (!+offset || offset < 1)
       ? 1
@@ -57,19 +64,20 @@ export default function paginate(
         return (n_pages - i)
       // do nothing
       return x
-      // upper and lower bound sometimes overlap with higher offsets in combination with low total item numbers, when this is the case, subtract two and convert negative numbers to positive, for some reason that works :)
-    }).map(
+    })
+    // upper and lower bound sometimes overlap with higher offsets in combination with low total item numbers, when this is the case, subtract two and convert negative numbers to positive, for some reason that works :)
+    .map(
       (x: number) =>
         (x < 1) ? -(x - 2) : x)
 
   // ..though, this does sometimes create duplicate entries, which we will filter out here
-  const corrected: Array<number> = (
-    (data: Array<number>, key: Function) => {
-      const seen: Set<number> = new Set<number>()
+  const seen: Set<number> = new Set<number>()
 
-      return data.filter((x: number) => seen.has(key(x)) ? false : seen.add(key(x))
-      )
-    })(shifted, (it: Array<number>) => it)
+  const corrected: Array<number> =
+    shifted.filter(
+      (x: number) =>
+        seen.has(x) ? false : seen.add(x)
+    )
 
   // return sorted array, with a slice that only slices the page numbers when we dont have enough items to display for the page-offset we desire
   return corrected.sort(
