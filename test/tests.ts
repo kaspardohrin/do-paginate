@@ -81,9 +81,15 @@ const test_cases: Array<TestCase> = [
   ],
 
   [
-    '-Infinity',
+    '+-Infinity',
     Array.from({ length: 1e5 * 2 + 1 }, (_, i) => i++ + 1),
     [-Infinity, 25, Infinity, Infinity],
+  ],
+
+  [
+    '-Infinity',
+    [1],
+    [-Infinity, 25, -Infinity,-Infinity],
   ],
 
 ]
@@ -106,14 +112,14 @@ const evaluate = ([tag, expected, [i, n, t, o]]: TestCase): boolean => {
 
   const [s, ns]: [number, number] = process.hrtime(start)
 
-  const 𝚫ms: number = (s + (ns / 1e9) * 1e3)
+  const ms: number = (s + (ns / 1e9) * 1e3)
 
   return (equal)
     ? (console.info(
       `\x1b[32m\x1b[1m %s\x1b[0m \x1b[32m%s\x1b[0m \x1b[1m%s\x1b[0m`,
       `${tag}`,
       `passed in:`,
-      `${𝚫ms.toFixed(3)}ms`,
+      `${ms.toFixed(3)}ms`,
     ),
       true
     )
@@ -138,7 +144,7 @@ const run = (tc: Array<TestCase>): void => {
 
   const [s, ns]: [number, number] = process.hrtime(start)
 
-  const 𝚫t: number = s + (ns / 1e9)
+  const _s: number = s + (ns / 1e9)
 
   console.info(
     `\n${(tc.length === score) ? '\x1b[32m' : '\x1b[33m'}\x1b[1m%s %s\x1b[0m`,
@@ -148,7 +154,7 @@ const run = (tc: Array<TestCase>): void => {
 
   console.info(
     `\n\x1b[33m%s\x1b[0m`,
-    `done testing ${tc.length} test-case(s) in ${𝚫t.toFixed(3)}s`,
+    `done testing ${tc.length} test-case(s) in ${_s.toFixed(3)}s`,
   )
 }
 
