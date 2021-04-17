@@ -123,7 +123,7 @@ const evaluate = ([tag, expected, [i, n, t, o]]: TestCase): boolean => {
     ),
       true
     )
-    // this is end of the function, and for conveniency im mutating `received` and/or `expected` above 20 elements
+    // this is end of the function, for conveniency im mutating `received` and/or `expected` above 20 elements
     : (console.error(
       `\x1b[41m %s \x1b[0m \x1b[31m%s \n \x1b[1m%s\n \x1b[31m%s\x1b[0m`,
       `${tag}`,
