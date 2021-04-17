@@ -120,7 +120,7 @@ MIT
 
 
 ## change-log
-`v1.0.9`: change css in code example from width to min-width, refactor pagination algorithm slightly which resulted in ~10% speed increase, add test script, extend build script in package.json<br>
+`v1.1.0`: change css in code example from width to min-width, refactor pagination algorithm slightly which resulted in ~10% speed increase, add test script, extend build script in package.json<br>
 `v1.0.8`: extended code example with arrows to increment index by +1 or -1<br>
 `v1.0.7`: forgot to build typescript after making changes, parameter: `offset` is now actually required<br>
 `v1.0.6`: update package.json<br>
