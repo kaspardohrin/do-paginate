@@ -112,14 +112,14 @@ const evaluate = ([tag, expected, [i, n, t, o]]: TestCase): boolean => {
 
   const [s, ns]: [number, number] = process.hrtime(start)
 
-  const ms: number = (s + (ns / 1e9) * 1e3)
+  const _ms: number = (s + (ns / 1e9) * 1e3)
 
   return (equal)
     ? (console.info(
       `\x1b[32m\x1b[1m %s\x1b[0m \x1b[32m%s\x1b[0m \x1b[1m%s\x1b[0m`,
       `${tag}`,
       `passed in:`,
-      `${ms.toFixed(3)}ms`,
+      `${_ms.toFixed(3)}ms`,
     ),
       true
     )
