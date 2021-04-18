@@ -28,19 +28,6 @@ create an array with numbers in incremental order with the current index in the 
 ## code-examples
 import the pagination -file and pass in your parameters
 
-basic typescript example
-```typescript
-  import paginate from 'do-paginate'
-
-  const index: number = 5
-  const items_per_page: number = 25
-  const items_total: number = 5000
-  const offset: number = 5
-
-  const sequence: Array<number> =
-    paginate(index, items_per_page, items_total, offset) // [ 1,2,3,4,5,6,7,8,9,10,11 ]
-```
-
 basic javascript example
 ```javascript
   // javascript
@@ -52,6 +39,19 @@ basic javascript example
   const offset = 5
 
   const sequence =
+    paginate(index, items_per_page, items_total, offset) // [ 1,2,3,4,5,6,7,8,9,10,11 ]
+```
+
+basic typescript example
+```typescript
+  import paginate from 'do-paginate'
+
+  const index: number = 5
+  const items_per_page: number = 25
+  const items_total: number = 5000
+  const offset: number = 5
+
+  const sequence: Array<number> =
     paginate(index, items_per_page, items_total, offset) // [ 1,2,3,4,5,6,7,8,9,10,11 ]
 ```
 
@@ -68,7 +68,7 @@ typescript with express and basic routing example
 
   // request url: /
   app.get('/', async (_, res) =>
-    res.send("<a href='/index=1&limit=25'>test pagination</a>")
+    res.send(`<a href='/index=1&limit=25'>test pagination</a>`)
   )
 
   // request url: /index=1&limit=25
@@ -120,6 +120,8 @@ MIT
 
 
 ## change-log
+`v1.1.3`: update test output, log wasnt showing expected and received values correctly, change some wording<br>
+`v1.1.2`: update readme<br>
 `v1.1.1`: keep test files in git repo only, changed my mind<br>
 `v1.1.0`: change css in code example from width to min-width, refactor pagination algorithm slightly which resulted in ~10% speed increase, add test script, extend build script in package.json<br>
 `v1.0.8`: extended code example with arrows to increment index by +1 or -1<br>

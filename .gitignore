@@ -2,4 +2,6 @@ lib/
 bin/
 test/*.js
 
+.github/
+
 node_modules/

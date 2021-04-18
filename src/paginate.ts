@@ -56,11 +56,11 @@ export default function paginate(
     (x: number, i: number, o: Array<number>) => {
       // x is 0 or negative number
       if (x < 1)
-        // subtract one from x (which is negative or 0) and subtract this value from the highest element in the array (-- equals +), i.e., [-1,0,1,2,3] => [3-(-1-1), 3-(-0-1), 1,2,3] => [5, 4, 1,2,3]
+        // subtract one from x (which is negative or 0) and subtract this value from the highest element in the array (-- equals +), i.e., [-1,0,1,2,3] => [3-(-1-1), 3-(-0-1), 1,2,3] which evaluates to [5, 4, 1,2,3]
         return (o?.[o.length - 1] - (x - 1))
       // x is higher than the total amount of pages
       if (x > n_pages)
-        // subtract i from max pages, i.e., [98,99,100,101,102] => [98,99,100, 100-3, 100-4] => [98,99,100, 97, 96]
+        // subtract i from max pages, i.e., [98,99,100,101,102] => [98,99,100, 100-3, 100-4] which evaluates to [98,99,100, 97, 96]
         return (n_pages - i)
       // do nothing
       return x

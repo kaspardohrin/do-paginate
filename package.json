@@ -33,7 +33,7 @@
     "build": "tsc -p tsconfig.json",
     "build:test": "tsc -p tsconfig.test.json && mv lib/src/* lib/ && mv lib/test/tests.js test/ && rm -rf lib/src && rm -rf lib/test && sed -i \"s/..\\/src\\/paginate/..\\/lib\\/paginate/g\" test/tests.js",
     "publish": "npm publish --access public",
-    "test": "node test/tests.js"
+    "test": "node test/tests.js || (echo not all tests passed! && exit 1)"
   },
   "devDependencies": {
     "@types/node": "^14.14.41",
