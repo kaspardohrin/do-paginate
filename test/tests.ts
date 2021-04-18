@@ -96,6 +96,8 @@ const test_cases: Array<TestCase> = [
 
 const equals = (x: Array<number>, y: Array<number>): boolean => {
 
+  if (!x.length) return (x.length === y.length)
+
   for (let i = 0; i < x.length; i++) {
     if (x[i] !== y[i]) return false
   }
@@ -128,14 +130,14 @@ const evaluate = ([tag, expected, [i, n, t, o]]: TestCase): boolean => {
       `\x1b[41m %s \x1b[0m \x1b[31m%s \n \x1b[1m%s\n \x1b[31m%s\x1b[0m`,
       `${tag}`,
       `failed`,
-      (expected.length < 20) ? `expected: ${expected}` : `expected [${expected.shift()}, ..., ${expected.pop()}]`,
-      (received.length < 20) ? `received: ${received}` : `received [${received.shift()}, ..., ${received.pop()}]`,
+      (expected.length < 20) ? `expected: [${expected}]` : `expected [${expected.shift()}, ..., ${expected.pop()}]`,
+      (received.length < 20) ? `received: [${received}]` : `received [${received.shift()}, ..., ${received.pop()}]`,
     ),
       false
     )
 }
 
-const run = (tc: Array<TestCase>): void => {
+const run = (tc: Array<TestCase>): boolean => {
   const start: [number, number] = process.hrtime()
 
   const results: Array<boolean> = tc.map((x: TestCase, _: number) => evaluate(x))
@@ -146,8 +148,10 @@ const run = (tc: Array<TestCase>): void => {
 
   const _s: number = s + (ns / 1e9)
 
+  const success: boolean = (tc.length === score)
+
   console.info(
-    `\n${(tc.length === score) ? '\x1b[32m' : '\x1b[33m'}\x1b[1m%s %s\x1b[0m`,
+    `\n${(success) ? '\x1b[32m' : '\x1b[33m'}\x1b[1m%s %s\x1b[0m`,
     `${score}/${results.length}`,
     `tests passed!`
   )
@@ -156,6 +160,11 @@ const run = (tc: Array<TestCase>): void => {
     `\n\x1b[33m%s\x1b[0m`,
     `done testing ${tc.length} test-case(s) in ${_s.toFixed(3)}s`,
   )
+
+  return success
 }
 
-run(test_cases)
+try {
+  if (!run(test_cases)) throw ('some tests were unsuccessful')
+
+} catch (why: unknown) { throw (why) }
