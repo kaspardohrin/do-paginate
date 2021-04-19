@@ -91,7 +91,6 @@ const test_cases: Array<TestCase> = [
     Array.from({ length: 1e5 * 2 + 1 }, (_, i) => i++ + (1e15 - 1e5)),
     [Infinity, 25, Infinity, Infinity],
   ],
-
 ]
 
 const equals = (x: Array<number>, y: Array<number>): boolean => {
@@ -156,7 +155,7 @@ const run = (tc: Array<TestCase>): boolean => {
     `tests passed!`
   )
 
-  console.info(
+  console.error(
     `\n\x1b[33m%s\x1b[0m`,
     `done testing ${tc.length} test-case(s) in ${_s.toFixed(3)}s`,
   )

@@ -2,6 +2,7 @@ src/
 test/
 
 .git/
+.github/
 
 node_modules/
 
