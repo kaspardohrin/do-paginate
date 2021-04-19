@@ -155,6 +155,7 @@ typescript with express and basic routing example
 |---|---|---|---|
 | `v1.2.0` | 161ns (0.000161ms) | 443ns | 17ms |
 | `<=v1.1.6` | 410ns | 1794ns | 37ms |
+
 **min** and **reg** are based on the average of *1 000 000 iterations*, **max** is based on average of *100 iterations*.
 also the hardware matters, but the proportions should be about the same.
 
