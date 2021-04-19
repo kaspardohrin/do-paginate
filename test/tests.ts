@@ -33,6 +33,18 @@ const test_cases: Array<TestCase> = [
   ],
 
   [
+    'INDEX, LIMIT, CONTENT, OFFSET ARE FRACTION >x.0, <x.5',
+    [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+    [25.01, 10.01, 500.01, 5.01],
+  ],
+
+  [
+    'INDEX, LIMIT, CONTENT, OFFSET ARE FRACTION >x.5, <(x-1).0',
+    [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+    [25.99, 10.99, 500.99, 5.99],
+  ],
+
+  [
     'OFFSET > CONTENT',
     [1, 2, 3, 4, 5],
     [1, 10, 50, 5],
@@ -54,6 +66,12 @@ const test_cases: Array<TestCase> = [
     'i WAY OVER && OFFSET > CONTENT',
     [1, 2, 3, 4, 5],
     [500, 10, 50, 10],
+  ],
+
+  [
+    'ALL 1',
+    [1],
+    [1, 1, 1, 1],
   ],
 
   [
@@ -100,7 +118,7 @@ const equals = (x: Array<number>, y: Array<number>): boolean => {
   for (let i = 0; i < x.length; i++) {
     if (x[i] !== y[i]) return false
   }
-  return true
+  return (x.length === y.length)
 }
 
 const evaluate = ([tag, expected, [i, n, t, o]]: TestCase): boolean => {
@@ -113,7 +131,7 @@ const evaluate = ([tag, expected, [i, n, t, o]]: TestCase): boolean => {
 
   const [s, ns]: [number, number] = process.hrtime(start)
 
-  const _ms: number = (s + (ns / 1e9) * 1e3)
+  const _ms: number = (s * 1e3) + (ns / 1e6)
 
   return (equal)
     ? (console.info(
@@ -151,7 +169,7 @@ const run = (tc: Array<TestCase>): boolean => {
 
   console.info(
     `\n${(success) ? '\x1b[32m' : '\x1b[33m'}\x1b[1m%s %s\x1b[0m`,
-    `${score}/${results.length}`,
+    `${score}/${tc.length}`,
     `tests passed!`
   )
 

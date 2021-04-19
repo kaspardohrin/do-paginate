@@ -150,11 +150,17 @@ typescript with express and basic routing example
   - takes a couple ms to generate
 
 
-## license
-MIT
+## performance
+| version | min: [1] | reg: [1..11] | max: [1..200001] |
+|---|---|---|---|
+| `v1.1.7` | 161ns (0.000161ms) | 443ns | 17ms |
+| `<=v1.1.6` | 410ns | 1794ns | 37ms |
+**min** and **reg** are based on the average of *1 000 000 iterations*, **max** is based on average of *100 iterations*.
+also the hardware matters, but the proportions should be about the same.
 
 
 ## change-log
+`v1.1.7`: refactor and optimizations, add few extra test cases
 `v1.1.6`: update intro: wording and gif, add basic styling to code example<br>
 `v1.1.5`: handle not all tests passing more gracefully, add test.js to npm<br>
 `v1.1.4`: update readme<br>
@@ -171,3 +177,7 @@ MIT
 `v1.0.2`: update readme, and fix typo's<br>
 `v1.0.1`: update readme, and fix typo's<br>
 `v1.0.0`: initial publish<br>
+
+
+## license
+MIT

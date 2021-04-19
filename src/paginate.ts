@@ -19,68 +19,56 @@ export default function paginate(
       ? 1
       : (index_current > 1e15)
         ? 1e15
-        : index_current
+        : Math.floor(index_current)
   // cap at 1 for <1 and 1e50 for >1e50
   const f_items_per_page: number =
     (!+items_per_page || items_per_page < 1)
       ? 1
       : (items_per_page > 1e50)
         ? 1e50
-        : items_per_page
+        : Math.floor(items_per_page)
   // cap at 1 for <1 and 1e50 for >1e50
   const f_items_total: number =
     (!+items_total || items_total < 1)
       ? 1
       : (items_total > 1e50)
         ? 1e50
-        : items_total
+        : Math.floor(items_total)
+  // cap at 1 for <1 and 1e5 for >1e5
   const f_offset: number =
     (!+offset || offset < 1)
       ? 1
       : (offset > 1e5)
         ? 1e5
-        : offset
+        : Math.floor(offset)
+
+  const n_pages: number =
+    (f_items_total / f_items_per_page < 1)
+      ? 1
+      : f_items_total / f_items_per_page
 
   // empty array to store page-numbers in
   const page_numbers: Array<number> = new Array<number>()
-
-  // round up to handle rest values
-  const n_pages: number = Math.ceil(f_items_total / f_items_per_page)
-
   // increment per one starting from starting: (index - offset) to ending: (index + offset) and add each increment to array
-  for (let n: number = Math.floor(f_index_current - f_offset); n <= Math.floor(f_index_current + f_offset); ++n)
+  for (let n: number = f_index_current - f_offset; n <= f_index_current + f_offset; n++)
     page_numbers.push(n)
 
-  // correct under- and upper -bound entries from first array by replacing them
+  // correct under- and upper -bound entries
   const shifted: Array<number> = page_numbers.map(
     (x: number, i: number, o: Array<number>) => {
-      // x is 0 or negative number
+      // return last element + pos(x) + 1
       if (x < 1)
-        // subtract one from x (which is negative or 0) and subtract this value from the highest element in the array (-- equals +), i.e., [-1,0,1,2,3] => [3-(-1-1), 3-(-0-1), 1,2,3] which evaluates to [5, 4, 1,2,3]
         return (o?.[o.length - 1] - (x - 1))
-      // x is higher than the total amount of pages
-      if (x > n_pages)
-        // subtract i from max pages, i.e., [98,99,100,101,102] => [98,99,100, 100-3, 100-4] which evaluates to [98,99,100, 97, 96]
-        return (n_pages - i)
-      // do nothing
+
+      if (x > n_pages && n_pages - i > 0)
+        return n_pages - i
+
       return x
     })
-    // upper and lower bound sometimes overlap with higher offsets in combination with low total item numbers, when this is the case, subtract two and convert negative numbers to positive, for some reason that works :)
-    .map(
-      (x: number) =>
-        (x < 1) ? -(x - 2) : x)
 
-  // ..though, this does sometimes create duplicate entries, which we will filter out here
-  const seen: Set<number> = new Set<number>()
+  const filtered: Array<number> = shifted.filter((x: number) => !(x > n_pages))
 
-  const corrected: Array<number> =
-    shifted.filter(
-      (x: number) =>
-        seen.has(x) ? false : seen.add(x)
-    )
-
-  // return sorted array, with a slice that only slices the page numbers when we dont have enough items to display for the page-offset we desire
-  return corrected.sort(
+  return filtered.sort(
     (a: number, b: number) => a - b
-  ).slice(0, n_pages)
+  )
 }
