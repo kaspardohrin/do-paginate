@@ -163,7 +163,6 @@ const run = (tc: Array<TestCase>): boolean => {
   return success
 }
 
-try {
-  if (!run(test_cases)) throw ('some tests were unsuccessful')
-
-} catch (why: unknown) { throw (why) }
+// return error code when any tests fail, this is useful when setting up ci,
+// where the deployment/merge process should be cancelled when not all checks pass
+run(test_cases) ? process.exit(0) : process.exit(125)
