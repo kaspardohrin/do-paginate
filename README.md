@@ -1,5 +1,10 @@
 # do-paginate
-create an array with numbers in incremental order with the current index in the middle of the sequence, and the sequence always being the same length, no matter the index passed in
+create an array of numbers which can be used to navigate any dataset or database.
+
+this package is extremely lightweight, fast and easy to use, while also being able to handle any edge-case.
+
+![gif demonstrating example with express](https://github.com/kaspardohrin/do-paginate/blob/master/resources/pagination.gif)
+*result of running the code example below*
 
 ## installation
 ```bash
@@ -85,7 +90,7 @@ typescript with express and basic routing example
     const limit: number =
       +(req.params?.['limit'] as string)?.replace(/[^\d-]/gm, '') || d_limit
 
-    const items_total: number = 5000 // TODO: get total items
+    const items_total: number = 500 // TODO: get total items
 
     const pages: Array<number> = paginate(index, limit, items_total, offset)
 
@@ -93,17 +98,43 @@ typescript with express and basic routing example
 
     res.send(
       [
+        `<style>
+        #pagination {
+          display: flex;
+          justify-content: center;
+        }
+        a {
+          all: unset;
+        }
+        a:active {
+          color: black;
+          opacity: 0.5;
+        }
+        .page {
+          text-align: center;
+          min-width: 27px;
+          padding: 5px 1px;
+          cursor: pointer;
+        }
+        .current {
+          font-weight: bold;
+        }
+        </style>`,
+
+        `<div id="pagination">`,
         // subtract true or false casted to number (true => 1, false => 0)
-        `<a href="/index=${index - (+(index > 1))}&limit=${limit}"> < </a>`,
+        `<a class="page" href="/index=${index - (+(index > 1))}&limit=${limit}"> < </a>`,
+        // create <a> element with correct href for each number in pages
         pages
           .map(
             (x: number, _: number) =>
-              `<a href="/index=${x}&limit=${limit}" style="min-width: 27px; text-align: center; display: inline-block;">${(x === index) ? `[${x}]` : x}</a>`
+              `<a class="page ${(x === index) ? "current" : ""}" href="/index=${x}&limit=${limit}">${x}</a>`
           )
           .join('\n'),
         // add true or false casted to number (true => 1, false => 0)
-        `<a href="/index=${index + (+(index < pages?.[pages.length - 1]))}&limit=${limit}"> > </a>`,
-      ].join('')
+        `<a class="page" href="/index=${index + (+(index < pages?.[pages.length - 1]))}&limit=${limit}"> > </a>`,
+        `</div>`,
+      ].join('\n')
     )
   })
 
@@ -123,6 +154,7 @@ MIT
 
 
 ## change-log
+`v1.1.6`: update intro: wording and gif, add basic styling to code example<br>
 `v1.1.5`: handle not all tests passing more gracefully, add test.js to npm<br>
 `v1.1.4`: update readme<br>
 `v1.1.3`: update test output, log wasnt showing expected and received values correctly, change some wording<br>
