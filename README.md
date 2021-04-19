@@ -1,4 +1,4 @@
-# paginate
+# do-paginate
 create an array with numbers in incremental order with the current index in the middle of the sequence, and the sequence always being the same length, no matter the index passed in
 
 ## installation
@@ -44,6 +44,7 @@ basic javascript example
 
 basic typescript example
 ```typescript
+  // typescript
   import paginate from 'do-paginate'
 
   const index: number = 5
@@ -92,14 +93,16 @@ typescript with express and basic routing example
 
     res.send(
       [
-        `<a href=/index=${index - 1}&limit=${limit}> < </a>`,
+        // subtract true or false casted to number (true => 1, false => 0)
+        `<a href="/index=${index - (+(index > 1))}&limit=${limit}"> < </a>`,
         pages
           .map(
             (x: number, _: number) =>
-              `<a href='/index=${x}&limit=${limit}' style="min-width: 18px; text-align: center; display: inline-block;">${x}</a>`
+              `<a href="/index=${x}&limit=${limit}" style="min-width: 27px; text-align: center; display: inline-block;">${(x === index) ? `[${x}]` : x}</a>`
           )
           .join('\n'),
-        `<a href=/index=${index + 1}&limit=${limit}> > </a>`,
+        // add true or false casted to number (true => 1, false => 0)
+        `<a href="/index=${index + (+(index < pages?.[pages.length - 1]))}&limit=${limit}"> > </a>`,
       ].join('')
     )
   })
@@ -120,6 +123,7 @@ MIT
 
 
 ## change-log
+`v1.1.4`: update readme<br>
 `v1.1.3`: update test output, log wasnt showing expected and received values correctly, change some wording<br>
 `v1.1.2`: update readme<br>
 `v1.1.1`: keep test files in git repo only, changed my mind<br>
