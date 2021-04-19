@@ -3,7 +3,7 @@ create an array of numbers which can be used to navigate any dataset or database
 
 this package is extremely lightweight, fast and easy to use, while also being able to handle any edge-case.
 
-![gif demonstrating example with express](https://github.com/kaspardohrin/do-paginate/blob/master/resources/pagination.gif)
+![gif demonstrating example with express](https://github.com/kaspardohrin/do-paginate/blob/master/resources/pagination.gif?raw=true)
 *result of running the code example below*
 
 ## installation
