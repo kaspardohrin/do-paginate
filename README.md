@@ -123,6 +123,7 @@ MIT
 
 
 ## change-log
+`v1.1.5`: handle not all tests passing more gracefully, add test.js to npm<br>
 `v1.1.4`: update readme<br>
 `v1.1.3`: update test output, log wasnt showing expected and received values correctly, change some wording<br>
 `v1.1.2`: update readme<br>
