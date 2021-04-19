@@ -153,14 +153,15 @@ typescript with express and basic routing example
 ## performance
 | version | min: [1] | reg: [1..11] | max: [1..200001] |
 |---|---|---|---|
-| `v1.1.7` | 161ns (0.000161ms) | 443ns | 17ms |
+| `v1.2.0` | 161ns (0.000161ms) | 443ns | 17ms |
 | `<=v1.1.6` | 410ns | 1794ns | 37ms |
 **min** and **reg** are based on the average of *1 000 000 iterations*, **max** is based on average of *100 iterations*.
 also the hardware matters, but the proportions should be about the same.
 
 
 ## change-log
-`v1.1.7`: refactor and optimizations, add few extra test cases
+`v1.2.0`: refactor and optimizations, add few extra test cases
+
 `v1.1.6`: update intro: wording and gif, add basic styling to code example<br>
 `v1.1.5`: handle not all tests passing more gracefully, add test.js to npm<br>
 `v1.1.4`: update readme<br>
@@ -168,6 +169,7 @@ also the hardware matters, but the proportions should be about the same.
 `v1.1.2`: update readme<br>
 `v1.1.1`: keep test files in git repo only, changed my mind<br>
 `v1.1.0`: change css in code example from width to min-width, refactor pagination algorithm slightly which resulted in ~10% speed increase, add test script, extend build script in package.json<br>
+
 `v1.0.8`: extended code example with arrows to increment index by +1 or -1<br>
 `v1.0.7`: forgot to build typescript after making changes, parameter: `offset` is now actually required<br>
 `v1.0.6`: update package.json<br>
