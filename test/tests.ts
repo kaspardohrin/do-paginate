@@ -70,8 +70,8 @@ const test_cases: Array<TestCase> = [
 
   [
     'i WAY OVER && OFFSET > CONTENT',
-    [1, 2, 3, 4, 5],
-    [500, 10, 50, 10],
+    [1, 2, 3, 4, 5, 6],
+    [500, 10, 51, 10],
   ],
 
   [
