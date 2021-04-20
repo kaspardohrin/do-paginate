@@ -1,6 +1,6 @@
 {
   "name": "do-paginate",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "license": "MIT",
   "description": "create an array of numbers which can be used to navigate any dataset or database",
   "main": "lib/paginate.js",
@@ -34,7 +34,8 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "build:test": "tsc -p tsconfig.test.json && mv lib/src/* lib/ && mv lib/test/tests.js test/ && rm -rf lib/src && rm -rf lib/test && sed -i \"s/..\\/src\\/paginate/..\\/lib\\/paginate/g\" test/tests.js",
-    "test": "node test/tests.js || (echo not all tests passed - returning exit code 125 to cancel all further operations! && exit 125)"
+    "test": "node test/tests.js || (echo not all tests passed - returning exit code 125 to cancel all further operations! && exit 125)",
+    "rebuild": "rm -rf node_modules yarn.lock lib/ test/tests.js && yarn && yarn build && yarn build:test"
   },
   "devDependencies": {
     "@types/node": "^14.14.41",
