@@ -66,7 +66,9 @@ export default function paginate(
       return x
     })
 
-  const filtered: Array<number> = shifted.filter((x: number) => !(x > n_pages))
+  const filtered: Array<number> = shifted.filter(
+    (x: number) => !(x > n_pages)
+  )
 
   return filtered.sort(
     (a: number, b: number) => a - b
