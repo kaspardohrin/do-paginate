@@ -153,14 +153,15 @@ typescript with express and basic routing example
 ## performance
 | version | min: [1] | reg: [1..11] | max: [1..200001] |
 |---|---|---|---|
-| `v1.2.0` | 161ns (0.000161ms) | 443ns | 17ms |
-| `<=v1.1.6` | 410ns | 1794ns | 37ms |
+| `>= v1.2.0` | 161ns (0.000161ms) | 443ns | 17ms |
+| `<= v1.1.6` | 410ns | 1794ns | 37ms |
 
-**min** and **reg** are based on the average of *1 000 000 iterations*, **max** is based on average of *100 iterations*.
+**min** and **reg** are based on the average of *1 000 000 iterations*, **max** is based on the average of *100 iterations*.
 also the hardware matters, but the proportions should be about the same.
 
 
 ## change-log
+`v1.2.1`: forgot to ceil calculating max-pages for handling rest values, and added test case to make sure this works
 `v1.2.0`: refactor and optimizations, add few extra test cases
 
 `v1.1.6`: update intro: wording and gif, add basic styling to code example<br>

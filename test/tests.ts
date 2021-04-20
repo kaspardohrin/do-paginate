@@ -63,6 +63,12 @@ const test_cases: Array<TestCase> = [
   ],
 
   [
+    'CONTENT JUST BARELY OVER N/PAGES',
+    [1, 2],
+    [1, 10, 11, 5],
+  ],
+
+  [
     'i WAY OVER && OFFSET > CONTENT',
     [1, 2, 3, 4, 5],
     [500, 10, 50, 10],
