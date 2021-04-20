@@ -45,7 +45,7 @@ export default function paginate(
   const n_pages: number =
     (f_items_total / f_items_per_page < 1)
       ? 1
-      : f_items_total / f_items_per_page
+      : Math.ceil(f_items_total / f_items_per_page)
 
   // empty array to store page-numbers in
   const page_numbers: Array<number> = new Array<number>()
