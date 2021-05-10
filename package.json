@@ -1,6 +1,6 @@
 {
   "name": "do-paginate",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "license": "MIT",
   "description": "create an array of numbers which can be used to navigate any dataset or database",
   "main": "lib/paginate.js",
